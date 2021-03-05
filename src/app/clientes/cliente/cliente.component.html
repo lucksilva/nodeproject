@@ -1,0 +1,208 @@
+<div class="container">
+
+  <div class="ui-g-12">
+    <h1 class="text-center"><b>Clientes</b></h1>
+  </div>
+  <div class="ui-g-12">
+      <button class="btn btn-success" (click)="abrirDialogNovoCliente()">
+         Novo <i class="fa fa-plus"></i></button>
+  </div>
+  <div class="ui-g-12">
+        <div class="ui-widget-header" style="padding:4px 10px;border-bottom: 0 none">
+            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+            <input #fa type="text" pInputText size="20" placeholder="Busca..." maxlength="10">
+        </div>
+      <p-dataTable [value]="clientes" [paginator]="true" [rows]="8"
+      [responsive]="true" emptyMessage="Nenhum Cliente Encontrado..." [globalFilter]="fa"
+      [rowsPerPageOptions]="['8','15', '20', '30', '50', '100']">
+      <p-column styleClass="tabela-cliente-acao" header="Ações">
+          <ng-template pTemplate="body" let-cli="rowData">
+              <button class="btn btn-warning" (click)="abrirDialogEditarCliente(cli)">
+                <i class="fa fa-pencil"></i></button>
+          </ng-template>
+        </p-column>
+      <p-column field="nome" header="Cliente"></p-column>
+      <p-column field="telefone" header="Contato" styleClass="tabela-cliente-contato"></p-column>
+      <p-column field="email" header="E-mail" ></p-column>
+      <p-column field="cidade" header="Cidade" styleClass="tabela-cliente-cidade"></p-column>
+      <p-column field="uf" header="UF" styleClass="tabela-cliente-acao"></p-column>
+      </p-dataTable>
+
+  </div>
+</div>
+<p-dialog header="Cadastro Novo Cliente" [(visible)]="dialogNovoCliente"
+[responsive]="true" showEffect="fade" [modal]="true" [closable]="true"
+width="600" [draggable]="false">
+<div class="container" *ngIf="novoCliente">
+  <form #cliente="ngForm">
+        <div class="ui-g-9 ui-fluid">
+            <label><b>Cliente</b></label>
+            <input pInputText type="text" name="nome" required
+            [(ngModel)]="novoCliente.nome" minlength="5" maxlength="50" #nomeCliente>
+         </div>
+
+        <div class="ui-g-5 ui-fluid">
+            <label><b>Telefone</b></label>
+            <p-inputMask mask="(99)99999-9999" type="text" name="telefone" required
+            [(ngModel)]="novoCliente.telefone" minlength="11" maxlength="14" #telefoneCliente></p-inputMask>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>E-mail</b></label>
+            <input pInputText type="text" name="email" required
+            [(ngModel)]="novoCliente.email" minlength="5" maxlength="50" #emailCliente>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>RG</b></label>
+            <p-inputMask mask="99.999.999-9" type="text" name="rg" required
+            [(ngModel)]="novoCliente.rg" minlength="12" maxlength="12" #rgCliente></p-inputMask>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>CPF</b></label>
+            <p-inputMask mask="999.999.999-99" type="text" name="cpf" required
+            [(ngModel)]="novoCliente.cpf" minlength="14" maxlength="14" #cpfCliente></p-inputMask>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>CEP</b></label>
+            <p-inputMask mask="99999-999" name="cepResidencial" required
+            [(ngModel)]="novoCliente.cep" #cepCliente></p-inputMask>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>Endereço</b></label>
+            <input pInputText type="text" name="endereco" required
+            [(ngModel)]="novoCliente.endereco" minlength="5" maxlength="50" #enderecoCliente>
+         </div>
+
+         <div class="ui-g-3 ui-fluid">
+            <label><b>Número</b></label>
+            <input pInputText type="text" name="numero" required
+            [(ngModel)]="novoCliente.numero" minlength="1" maxlength="5" #numeroCliente>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>Bairro</b></label>
+            <input pInputText type="text" name="bairro" required
+            [(ngModel)]="novoCliente.bairro" minlength="5" maxlength="50" #bairroCliente>
+         </div>
+
+         <div class="ui-g-6 ui-fluid">
+            <label><b>Cidade</b></label>
+            <input pInputText type="text" name="cidade" required
+            [(ngModel)]="novoCliente.cidade" minlength="5" maxlength="40" #cidadeCliente>
+         </div>
+         <div class="ui-sm-3 ui-md-3 ui-g-2 ui-fluid">
+            <label><b>UF</b></label>
+            <input pInputText type="text" name="uf" required
+            [(ngModel)]="novoCliente.uf" minlength="2" maxlength="2" #ufCliente>
+         </div>
+         <div class="ui-g-6">
+            <label><b>Senha</b></label>
+            <input pPassword type="password" required name="senha" [(ngModel)]="senhaCli">
+         </div>
+
+         <div class="ui-g-6">
+            <label><b>Confirme sua Senha</b></label>
+            <input pPassword type="password" required name="senha" [(ngModel)]="novoCliente.senha">
+         </div>
+        </form>
+         <div class="ui-sm-12 ui-md-4 ui-g-6">
+           <button class="btn btn-success" [disabled]="!cliente.valid"
+           (click)="salvarCliente()">
+           <i class="fa fa-check"></i> Salvar</button>
+         </div>
+
+         <div class="ui-sm-12 ui-md-4 ui-g-6">
+             <button class="btn btn-warning"
+             (click)="fechar()">
+               <i class="fa fa-times"></i> Cancelar</button>
+           </div>
+  </div>
+</p-dialog>
+
+<p-dialog header="Atualizar Cliente" [(visible)]="dialogEditarCliente"
+[responsive]="true" showEffect="fade" [modal]="true" [closable]="true"
+width="600" [draggable]="false">
+<div class="container" *ngIf="clienteSelecionado">
+  <form #clientes="ngForm">
+        <div class="ui-g-9 ui-fluid">
+            <label><b>Cliente</b></label>
+            <input pInputText type="text" name="nomeSelecionado" required
+            [(ngModel)]="clienteSelecionado.nome" minlength="5" maxlength="50" #nomeClienteSelecionado>
+         </div>
+
+        <div class="ui-g-5 ui-fluid">
+            <label><b>Telefone</b></label>
+            <p-inputMask mask="(99)99999-9999" type="text" name="telefoneSelecionado" required
+            [(ngModel)]="clienteSelecionado.telefone" #telefoneClienteSelecionado></p-inputMask>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>E-mail</b></label>
+            <input pInputText type="text" name="emailSelecionado" required
+            [(ngModel)]="clienteSelecionado.email" minlength="5" maxlength="50" #emailClienteSelecionado>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>RG</b></label>
+            <p-inputMask mask="99.999.999-9" type="text" name="rgSelecionado" required
+            [(ngModel)]="clienteSelecionado.rg" minlength="12" maxlength="12" #rgClienteSelecionado></p-inputMask>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>CPF</b></label>
+            <p-inputMask mask="999.999.999-99" type="text" name="cpfSelecionado" required
+            [(ngModel)]="clienteSelecionado.cpf" minlength="14" maxlength="14" #cpfClienteSelecionado></p-inputMask>
+         </div>
+
+         <div class="ui-g-5 ui-fluid">
+            <label><b>CEP</b></label>
+            <p-inputMask mask="99.999-999" name="cepSelecionado" required
+            [(ngModel)]="clienteSelecionado.cep" #cepClienteSelecionado></p-inputMask>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>Endereço</b></label>
+            <input pInputText type="text" name="enderecoSelecionado" required
+            [(ngModel)]="clienteSelecionado.endereco" minlength="5" maxlength="50" #enderecoClienteSelecionado>
+         </div>
+
+         <div class="ui-g-3 ui-fluid">
+            <label><b>Número</b></label>
+            <input pInputText type="text" name="numeroSelecionado" required
+            [(ngModel)]="clienteSelecionado.numero" minlength="11" maxlength="14" #numeroClienteSelecionado>
+         </div>
+
+         <div class="ui-g-9 ui-fluid">
+            <label><b>Bairro</b></label>
+            <input pInputText type="text" name="bairroSelecionado" required
+            [(ngModel)]="clienteSelecionado.bairro" minlength="5" maxlength="50" #bairroClienteSelecionado>
+         </div>
+
+         <div class="ui-g-6 ui-fluid">
+            <label><b>Cidade</b></label>
+            <input pInputText type="text" name="cidadeSelecionado" required
+            [(ngModel)]="clienteSelecionado.cidade" minlength="5" maxlength="40" #cidadeClienteSelecionado>
+         </div>
+         <div class="ui-sm-3 ui-md-3 ui-g-2 ui-fluid">
+            <label><b>UF</b></label>
+            <input pInputText type="text" name="ufSelecionado" required
+            [(ngModel)]="clienteSelecionado.uf" minlength="2" maxlength="2" #ufClienteSelecionado>
+         </div>
+</form>
+         <div class="ui-sm-12 ui-md-5 ui-g-6">
+           <button class="btn btn-success"
+           (click)="atualizaCliente()" [disabled]="clientes.valid">
+           <i class="fa fa-retweet"></i> Atualizar e Fechar</button>
+         </div>
+
+         <div class="ui-sm-12 ui-md-4 ui-g-6">
+             <button class="btn btn-warning"
+             (click)="fechar()">
+               <i class="fa fa-times"></i> Cancelar</button>
+           </div>
+  </div>
+</p-dialog>

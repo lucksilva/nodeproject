@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="ui-g-12">
+      <h1 class="text-center"><b>Fornecedores</b></h1>
+    </div>
+
+    <div class="ui-g-12">
+        <p-dataTable [value]="fornecedores" [paginator]="true" [rows]="8"
+        [responsive]="true" emptyMessage="Nenhum Fornecedor Encontrado..."
+        [rowsPerPageOptions]="['8','15', '20', '30', '50', '100']">
+        <p-column field="nome" header="Fornecedor"></p-column>
+        <p-column field="telefone" header="Contato" styleClass="tabela-cliente-contato"></p-column>
+        <p-column field="email" header="E-mail" ></p-column>
+        <p-column field="cidade" header="Cidade" styleClass="tabela-cliente-cidade"></p-column>
+        <p-column field="uf" header="UF" styleClass="tabela-cliente-acao"></p-column>
+        </p-dataTable>
+    </div>
+  </div>

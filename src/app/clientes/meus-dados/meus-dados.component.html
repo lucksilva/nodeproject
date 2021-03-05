@@ -1,0 +1,80 @@
+<div class="container">
+
+  <div class="ui-g-12">
+    <h2 class="text-center"><b>Meus Dados</b></h2>
+  </div>
+
+  <div class="ui-g-12 fundoSobre">
+  <form #clientes="ngForm">
+    <div class="ui-g-6 ui-fluid">
+        <label><b>Cliente</b></label>
+        <input pInputText type="text" name="nomeSelecionado" required
+        [(ngModel)]="clienteSelecionado.nome" minlength="5" maxlength="50" #nomeClienteSelecionado>
+     </div>
+
+
+     <div class="ui-g-6 ui-fluid">
+       <label><b>E-mail</b></label>
+       <input pInputText type="text" name="emailSelecionado" required
+       [(ngModel)]="clienteSelecionado.email" minlength="5" maxlength="50" #emailClienteSelecionado>
+      </div>
+
+      <div class="ui-g-4 ui-fluid">
+          <label><b>Telefone</b></label>
+          <p-inputMask mask="(99)99999-9999" type="text" name="telefoneSelecionado" required
+          [(ngModel)]="clienteSelecionado.telefone" #telefoneClienteSelecionado></p-inputMask>
+       </div>
+     <div class="ui-g-4 ui-fluid">
+        <label><b>RG</b></label>
+        <p-inputMask mask="99.999.999-9" type="text" name="rgSelecionado" required
+        [(ngModel)]="clienteSelecionado.rg" minlength="12" maxlength="12" #rgClienteSelecionado></p-inputMask>
+     </div>
+
+     <div class="ui-g-4 ui-fluid">
+        <label><b>CPF</b></label>
+        <p-inputMask mask="999.999.999-99" type="text" name="cpfSelecionado" required
+        [(ngModel)]="clienteSelecionado.cpf" minlength="14" maxlength="14" #cpfClienteSelecionado></p-inputMask>
+     </div>
+
+     <div class="ui-g-6 ui-fluid">
+       <label><b>Endereço</b></label>
+       <input pInputText type="text" name="enderecoSelecionado" required
+       [(ngModel)]="clienteSelecionado.endereco" minlength="5" maxlength="50" #enderecoClienteSelecionado>
+      </div>
+
+           <div class="ui-g-3 ui-fluid">
+              <label><b>CEP</b></label>
+              <p-inputMask mask="99.999-999" name="cepSelecionado" required
+              [(ngModel)]="clienteSelecionado.cep" #cepClienteSelecionado></p-inputMask>
+           </div>
+
+     <div class="ui-g-3 ui-fluid">
+        <label><b>Número</b></label>
+        <input pInputText type="text" name="numeroSelecionado" required
+        [(ngModel)]="clienteSelecionado.numero" minlength="11" maxlength="14" #numeroClienteSelecionado>
+     </div>
+
+     <div class="ui-g-6 ui-fluid">
+        <label><b>Bairro</b></label>
+        <input pInputText type="text" name="bairroSelecionado" required
+        [(ngModel)]="clienteSelecionado.bairro" minlength="5" maxlength="50" #bairroClienteSelecionado>
+     </div>
+
+     <div class="ui-g-4 ui-fluid">
+        <label><b>Cidade</b></label>
+        <input pInputText type="text" name="cidadeSelecionado" required
+        [(ngModel)]="clienteSelecionado.cidade" minlength="5" maxlength="40" #cidadeClienteSelecionado>
+     </div>
+     <div class="ui-sm-2 ui-md-2 ui-g-2 ui-fluid">
+        <label><b>UF</b></label>
+        <input pInputText type="text" name="ufSelecionado" required
+        [(ngModel)]="clienteSelecionado.uf" minlength="2" maxlength="2" #ufClienteSelecionado>
+     </div>
+</form>
+     <div class="ui-sm-12 ui-md-5 ui-g-6">
+       <button class="btn btn-success"
+       (click)="atualizaCliente()" [disabled]="clientes.valid">
+       <i class="fa fa-retweet"></i> Atualizar Seus Dados</button>
+     </div>
+    </div>
+</div>
